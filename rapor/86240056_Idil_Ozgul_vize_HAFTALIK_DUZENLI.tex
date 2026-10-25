@@ -1,0 +1,428 @@
+% ====================================================================
+% VİZE RAPOR ŞABLONU – Türk Masalları Derlemesi Web Sayfası
+% --------------------------------------------------------------------
+% DERLEME: Overleaf'te Menu > Compiler > XeLaTeX (pdfLaTeX de çalışır).
+%
+% KURALLAR (şablonu kullanmadan önce okuyun):
+%  1. Bölüm başlıklarını SİLMEYİN ve sırasını DEĞİŞTİRMEYİN.
+%  2. [KÖŞELİ PARANTEZ] içindeki ve gri renkli açıklama metinlerini
+%     kendi bilgilerinizle değiştirin; açıklama metinlerini silin.
+%  3. MEBİS'e YALNIZCA bu raporun PDF'ini yükleyin.
+%     ZIP ve HTML dosyası YÜKLEMEYİN. Tüm kontroller GitHub'dan yapılır.
+%  4. Kapaktaki GitHub ve YouTube bağlantıları doğru ve tıklanabilir
+%     olmalıdır. Teslimden önce PDF'teki bağlantılara tıklayıp deneyin.
+%  5. Haftalık katkı tablosundaki görseller için resim dosyalarını
+%     (hafta1.png, hafta2.png, ...) Overleaf projesine yükleyin.
+%     Dosya adlarında boşluk ve Türkçe karakter kullanmayın.
+%     Resim yoksa tabloda "görsel ekleyin" kutusu görünür.
+%  6. Yapay zekâ kullandıysanız Bölüm 5'i doldurun.
+% ====================================================================
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else
+  \usepackage{fontspec}\setmainfont{DejaVu Serif}
+\fi
+\usepackage[shorthands=off,turkish]{babel}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{amssymb}
+\usepackage{caption}
+\usepackage{needspace}
+\usepackage{placeins}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\setlength{\headheight}{15pt}
+\setstretch{1.28}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlist{itemsep=2pt, topsep=4pt}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, urlcolor=blue!50!black}
+
+\definecolor{ana}{HTML}{14325C}
+\definecolor{acik}{HTML}{EEF2F8}
+
+\lstset{basicstyle=\ttfamily\small, backgroundcolor=\color{acik},
+  frame=single, rulecolor=\color{ana}, breaklines=true,
+  columns=fullflexible, keepspaces=true, showstringspaces=false}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Bir Varmış -- Masal Atlası}
+\fancyhead[R]{Vize Raporu}
+\fancyfoot[C]{\thepage}
+
+% ---------- Yardımcı komutlar ----------
+% Gri açıklama metni (silinecek yönergeler için)
+\newcommand{\aciklama}[1]{{\color{gray}\itshape (#1)}}
+
+% Haftalık tablo görseli: dosya yoksa "görsel ekleyin" kutusu çıkar
+\newcommand{\haftagorsel}[1]{%
+  \IfFileExists{#1}{%
+    \includegraphics[width=\linewidth,height=4.2cm,keepaspectratio]{#1}%
+  }{%
+    \fbox{\parbox[c][2.6cm][c]{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{%
+      \centering\small\color{gray} Ekran görüntüsü / görsel ekleyin\\ \texttt{#1}}}%
+  }%
+}
+% Haftalık katılım kutuları (işaretlemek için $\square$ yerine $\boxtimes$ yazın)
+\newcommand{\katilimkutulari}{\par\vspace{3pt}\small $\square$ Ders içinde katılım sergiledim\par $\square$ Telafi yaptım}
+
+% Ek görsel: dosya yoksa hiçbir şey göstermez
+\newcommand{\haftaek}[1]{%
+  \IfFileExists{#1}{\\[4pt]\includegraphics[width=\linewidth,height=4.2cm,keepaspectratio]{#1}}{}%
+}
+
+% ---------- Kapak bilgileri ----------
+\newcommand{\universite}{İstanbul Medipol Üniversitesi / Görsel İletişim Tasarımı}
+\newcommand{\dersadi}{Programlamaya Giriş}
+\newcommand{\hocaadi}{Meral Şentürk}
+\newcommand{\ogrenciadi}{İdil Özgül}
+\newcommand{\ogrencino}{86240056}
+\newcommand{\projeadi}{Bir Varmış -- Masal Atlası}
+% Bağlantıları tam adres olarak yazın (https:// ile başlayarak)
+\newcommand{\githublink}{\url{https://github.com/ozgulidil4-lgtm/bir-varmis-masal-atlasi}}
+\newcommand{\youtubelink}{Video henüz yüklenmedi -- bağlantı eklenecek}
+
+\begin{document}
+
+% ====================================================================
+% KAPAK
+% ====================================================================
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+{\large \universite \par}
+\vspace{1.8cm}
+{\Huge\bfseries\color{ana} \projeadi \par}
+\vspace{0.4cm}
+{\Large Türk Masalları Derlemesi Web Sayfası \par}
+{\large Vize Raporu \par}
+\vspace{1.8cm}
+{\large \textbf{Ders:} \dersadi \par}
+{\large \textbf{Öğretim Üyesi:} \hocaadi \par}
+\vspace{1.2cm}
+{\large \textbf{Hazırlayan:} \ogrenciadi \par}
+{\large \textbf{Öğrenci No:} \ogrencino \par}
+\vspace{1.8cm}
+\fbox{\parbox{0.88\linewidth}{\centering\vspace{6pt}
+{\large\bfseries Proje Bağlantıları}\\[8pt]
+\textbf{GitHub deposu:}\\ \githublink \\[8pt]
+\textbf{YouTube sunum videosu:}\\ \youtubelink
+\vspace{6pt}}}
+\vfill
+{\large \today \par}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% ====================================================================
+\Needspace{7\baselineskip}
+\section{Giriş}
+% ====================================================================
+
+
+\Needspace{5\baselineskip}
+\subsection{Proje Özeti}
+Bu projede Türk masallarını dijital bir yıldız atlası içinde sunmayı amaçladım. On farklı masal seçtim ve bunları kaynaklarına dayanarak yeniden anlattım. Ana sayfada masallar yıldızları temsil eden simgelerle yer alıyor. Bir simgeye tıklandığında ayrı bir okuma alanı açılıyor. Arama kutusu, tür filtreleri, önceki--sonraki geçişi ve yazı büyüklüğü ayarları kullanıcıya yardımcı oluyor. Sayfa tek bir HTML dosyasında içsel CSS ve JavaScript ile hazırlanmıştır. Dışarıdan kütüphane veya görsel dosyası çağırmayan bir yapı hedefledim.
+
+\Needspace{5\baselineskip}
+\subsection{Gereksinimlerin Karşılanması}
+\begin{center}
+\rowcolors{2}{acik}{white}
+\begin{tabular}{@{}p{8.2cm}c@{}}
+\toprule
+\rowcolor{ana}\textcolor{white}{\textbf{Gereksinim}} & \textcolor{white}{\textbf{Durum}} \\
+\midrule
+Masal sayısı 8--12 arasında (10 masal)         & $\boxtimes$ \\
+Tek HTML dosyası                                    & $\boxtimes$ \\
+Stil kodları içsel (\texttt{<style>} içinde)        & $\boxtimes$ \\
+Betik kodları içsel (\texttt{<script>} içinde)      & $\boxtimes$ \\
+İnternetsiz açılıp çalışıyor                        & $\square$ \\
+JavaScript sayfada anlamlı bir işlev görüyor        & $\boxtimes$ \\
+Masal metinleri kendi cümlelerimle yazıldı          & $\square$ \\
+Sayfa telefonda da düzgün görünüyor                 & $\square$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+% ====================================================================
+\Needspace{7\baselineskip}
+\section{Masalların Seçimi}
+% ====================================================================
+
+
+\begin{longtable}{@{}cp{4cm}p{3cm}p{5.4cm}@{}}
+\toprule
+\textbf{No} & \textbf{Masal} & \textbf{Tür} & \textbf{Seçilme nedeni} \\
+\midrule
+\endhead
+1 & Keloğlan ve Altın Bülbül & Macera & Kardeşler arasındaki kıskançlığı ve cesareti anlatması \\
+2 & Üç Turunçlar & Büyülü & Büyü ve dönüşüm motifleri içermesi \\
+3 & Kırkıncı Oda & Gizem & Merak, güven ve sonuçları üzerine kurulması \\
+4 & Nardaniye Hanım & Büyülü & Kıskançlık ve dayanıklılık temasını işlemesi \\
+5 & Tuz Kadar Sevgi & Değerler & Sevginin değerini alışılmadık bir benzetmeyle anlatması \\
+6 & Peri Kızı & Büyülü & Masalsı karakterler ve olağanüstü olaylar içermesi \\
+7 & Ali Cengiz Oyunu & Zekâ & Zekâ ve dönüşüm üzerinden ilerlemesi \\
+8 & Keloğlan ile Yılan, Köpek, Kedi ve Balık & Macera & Yardımlaşma ve iyilik karşılığı temasını göstermesi \\
+9 & Kırk Dost Masalı & Değerler & Dostluk kavramını öne çıkarması \\
+10 & Değirmenci ile Tilki & Zekâ & Kurnazlık ve mizah unsurlarını birleştirmesi \\
+\bottomrule
+\end{longtable}
+
+% ====================================================================
+\Needspace{7\baselineskip}
+\section{Tasarım Kararları}
+% ====================================================================
+
+
+\Needspace{5\baselineskip}
+\subsection{Konuya Uygunluk}
+Masalların her birini gökyüzündeki ayrı bir yıldız olarak düşündüm. Yıldızların birbiriyle çizgiler üzerinden bağlantı kurması, masalların aynı kültürel evrenin parçaları olduğunu hissettiriyor. Ortadaki ay simgesi, gece anlatılan masalların atmosferini çağrıştırıyor. Okuma bölümünde ise koyu zeminden açık renkli bir kitap sayfasına geçiliyor; böylece keşif ve okuma deneyimleri birbirinden ayrılıyor.
+
+\Needspace{5\baselineskip}
+\subsection{Renk Paleti ve Yazı Tipi}
+\begin{center}
+\rowcolors{2}{acik}{white}
+\begin{tabular}{@{}llp{6.4cm}@{}}
+\toprule
+\rowcolor{ana}\textcolor{white}{\textbf{Ad}} & \textcolor{white}{\textbf{Kod}} & \textcolor{white}{\textbf{Nerede / neden kullandınız?}} \\
+\midrule
+Altın sarısı & \texttt{\#D8B66A} & Yıldız ve başlık vurgusu \\
+Krem & \texttt{\#F4EBDD} & Okuma alanı ve metinler \\
+Gece laciverti & \texttt{\#081326} & Ana arka plan; gece göğü etkisi \\
+Georgia / Arial & -- & Masal başlıklarında klasik, arayüzde sade ve okunur görünüm \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\Needspace{5\baselineskip}
+\subsection{Okunabilirlik, Gezinme ve Duyarlı Tasarım}
+\begin{itemize}
+  \item \textbf{Okunabilirlik:} Okuma alanı 18 piksel Georgia ve geniş satır aralığı kullanıyor; açık sayfa ile koyu metin kontrast sağlıyor.
+  \item \textbf{Gezinme:} Yıldız simgesine tıklayarak, arama yaparak veya tür filtresi seçerek masala ulaşılıyor.
+  \item \textbf{Duyarlı tasarım:} 800 piksel altında yıldız yerleşimi iki sütunlu ızgaraya, 420 piksel altında tek sütuna dönüşüyor.
+  \item \textbf{Tutarlılık:} Altın vurgu ve lacivert renkler tüm ekranlarda tekrarlanıyor.
+\end{itemize}
+
+\Needspace{5\baselineskip}
+\subsection{Ekran Görüntüleri}
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=.88\linewidth,height=7cm,keepaspectratio]{anasayfa.jpg}
+\caption{Masal Atlası giriş ekranı ve başlık düzeni.}
+\end{figure}
+\begin{figure}[htbp]
+\centering\includegraphics[width=.88\linewidth,height=7cm,keepaspectratio]{atlas.jpg}
+\caption{Yıldız haritası, masal seçimi ve filtreleme alanı.}
+\end{figure}
+\begin{figure}[htbp]
+\centering\includegraphics[width=.88\linewidth,height=7cm,keepaspectratio]{okuma.jpg}
+\caption{Masal okuma ekranı ve tipografik hiyerarşi.}
+\end{figure}
+\begin{figure}[htbp]
+\centering\includegraphics[width=.88\linewidth,height=7cm,keepaspectratio]{devam.jpg}
+\caption{Uzun masal metninin devam görünümü.}
+\end{figure}
+
+% ====================================================================
+\FloatBarrier
+\Needspace{7\baselineskip}
+\section{Gerçekleştirme}
+% ====================================================================
+
+
+\Needspace{5\baselineskip}
+\subsection{HTML Yapısı}
+Sayfa başlık ve gezinme alanı, tanıtım bölümü, masal atlası, okuma bölümü ve alt bilgiden oluşuyor. HTML içinde header, nav, section, article, footer, button ve input etiketlerini kullandım.
+
+\Needspace{5\baselineskip}
+\subsection{İçsel CSS}
+Stil kuralları aynı HTML içindeki style etiketinde. Üst menü flex düzeninde, dar ekranlardaki masal kartları CSS grid ile yerleşiyor. Media query kuralları 800 ve 420 piksel eşiklerini kullanıyor.
+
+\begin{lstlisting}[caption={İçsel CSS'ten önemli bir bölüm}]
+@media(max-width:420px){.galaksi{grid-template-columns:1fr}}
+\end{lstlisting}
+
+\Needspace{5\baselineskip}
+\subsection{İçsel JavaScript}
+Masallar JavaScript içinde nesnelerden oluşan bir dizide saklanıyor. Her nesnede başlık, kategori, sembol, kaynak ve metin bulunuyor. masallariGoster arama ve filtrelemeyi, filtreSec kategori seçimini, digerMasal önceki ve sonraki hikâyeyi, yaziBoyutu metin büyüklüğünü yönetiyor. Düğmeler onclick, arama kutusu oninput ile bağlanıyor.
+
+\begin{lstlisting}[caption={İçsel JavaScript'ten önemli bir bölüm}]
+const masallar = [ /* 10 masal nesnesi */ ];
+\end{lstlisting}
+
+\Needspace{5\baselineskip}
+\subsection{Sayfanın Özellikleri}
+Masal arama, kategori filtreleme, yıldızlara tıklayarak hikâye açma, önceki--sonraki masala geçiş ve yazı boyutu ayarı bulunmaktadır. İçerikler sayfa yenilenmeden gösterilir.
+
+
+% ====================================================================
+\Needspace{7\baselineskip}
+\section{Yapay Zekâ Kullanımı}
+% ====================================================================
+
+
+\begin{longtable}{@{}p{2.6cm}p{3.6cm}p{4.2cm}p{3.4cm}@{}}
+\toprule
+\textbf{Araç} & \textbf{Ne için kullandınız?} & \textbf{İstem (prompt) özeti} & \textbf{Sayfada nerede?} \\
+\midrule
+\endhead
+ChatGPT & Kod ve metin desteği & Tek dosyalık site, masalların yeniden anlatımı, hata düzeltme & HTML, CSS, JS, masal metinleri \\
+ChatGPT & Kod ve metin desteği & Tek dosyalık site, masalların yeniden anlatımı, hata düzeltme & HTML, CSS, JS, masal metinleri \\
+\bottomrule
+\end{longtable}
+
+\Needspace{5\baselineskip}
+\subsection{Anladığım ve Kendim Yaptığım Kısımlar}
+HTML dosyasını HTML Online Viewer üzerinde açıp denedim ve GitHub deposuna yükledim. Tasarımın masal atlası biçiminde olmasını istedim. Masal seçimi, metinlerin uygunluğu ve anlatım dili üzerinde tekrar çalıştım. Yapay zekâdan kodun düzenlenmesi ve metinlerin yeniden anlatılması için destek aldım; bu nedenle teslimden önce kodun işleyişini ve kaynakların doğruluğunu kendim de gözden geçirmem gerekiyor.
+
+% ====================================================================
+\FloatBarrier
+\Needspace{7\baselineskip}
+\section{Haftalık Katkılar}
+İlk üç haftanın derslerine katılamadım; ancak verilen çalışmaların tamamını sonradan yapıp telafi olarak teslim ettim. Diğer haftaların ders içi uygulamalarını ve ödevlerini aşağıda kendi haftalarında gösterdim.
+\par\medskip\Needspace{9\baselineskip}
+\subsection*{1. hafta}
+WorldWideWeb örneğini HTML etiketleri, bağlantılar, görsel ve içsel CSS ile yeniden düzenledim. Kırık beyaz zemin ve pembe metinlerden oluşan sayfanın üst ve alt bölümlerini gösterdim. Bu çalışmayı telafi olarak teslim ettim.
+\par\smallskip
+\Needspace{4.7cm}\noindent \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta1_1.jpg}\end{minipage}\hfill \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta1_2.jpg}\end{minipage}\par\smallskip
+\par\medskip\Needspace{9\baselineskip}
+\subsection*{2. hafta}
+WorldWideWeb sayfasının ikinci tasarımını açık mavi arka plan, mor yazı rengi ve Trebuchet MS yazı tipiyle hazırladım. HTML yapısını koruyup CSS özelliklerini değiştirdim. Çalışmayı telafi olarak teslim ettim.
+\par\smallskip
+\Needspace{4.7cm}\noindent \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta2_1.jpg}\end{minipage}\hfill \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta2_2.jpg}\end{minipage}\par\smallskip
+\par\medskip\Needspace{9\baselineskip}
+\subsection*{3. hafta}
+Mariana Çukuru hakkında görsel ve bağlantılar içeren HTML/CSS sayfası oluşturdum. Ayrıca JavaScript ile bağlantıyı yeni sekmede açma ve butona tıklanınca uyarı penceresi gösterme örnekleri yaptım. Çalışmaları telafi olarak teslim ettim.
+\par\smallskip
+\Needspace{4.7cm}\noindent \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta3_1.jpg}\end{minipage}\hfill \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta3_2.jpg}\end{minipage}\par\smallskip
+\Needspace{4.7cm}\noindent \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta3_3.jpg}\end{minipage}\hfill \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta3_4.jpg}\end{minipage}\par\smallskip
+\Needspace{4.7cm}\noindent \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta3_5.jpg}\end{minipage}\hfill \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta3_6.jpg}\end{minipage}\par\smallskip
+\par\medskip\Needspace{9\baselineskip}
+\subsection*{4. hafta}
+JavaScript ile butona basınca metin gösterme, kullanıcı adıyla karşılama mesajı oluşturma ve artırma--azaltma sayacı uygulamalarını yaptım.
+\par\smallskip
+\Needspace{4.7cm}\noindent \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta4_1.jpg}\end{minipage}\hfill \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta4_2.jpg}\end{minipage}\par\smallskip
+\Needspace{4.7cm}\noindent \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta4_3.jpg}\end{minipage}\par\smallskip
+\par\medskip\Needspace{9\baselineskip}
+\subsection*{5. hafta}
+Derste bir butonla sayfa yönlendirme ve kartların renklerini eşleştirme uygulamalarını yaptım. Ödevde ise Film Köşem sayfasını önce anlamsal HTML etiketleriyle, ardından Bootstrap kart ve sütun yapısıyla iki ayrı HTML dosyası olarak hazırladım.
+\par\smallskip
+\Needspace{4.7cm}\noindent \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta5_1.jpg}\end{minipage}\hfill \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta5_2.jpg}\end{minipage}\par\smallskip
+\par\medskip\Needspace{9\baselineskip}
+\subsection*{6. hafta}
+Mitolojik Yaratıklar konulu web sayfasını temel HTML/CSS ve Bootstrap kullanarak iki biçimde oluşturdum. CodePen üzerinde HTML ile CSS alanlarını ayrı kullanarak bir sayfa tasarladım. JavaScript ile butona basıldığında kutu rengini değiştiren uygulamayı denedim.
+\par\smallskip
+\Needspace{4.7cm}\noindent \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta6_1.jpg}\end{minipage}\hfill \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta6_2.jpg}\end{minipage}\par\smallskip
+\Needspace{4.7cm}\noindent \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta6_3.jpg}\end{minipage}\hfill \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta6_4.jpg}\end{minipage}\par\smallskip
+\Needspace{4.7cm}\noindent \begin{minipage}[t]{0.48\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=4.0cm,keepaspectratio]{ders_hafta6_5.jpg}\end{minipage}\par\smallskip
+\Needspace{4\baselineskip}
+\subsection*{7. ve 8. haftalar}
+Bu haftalara ait tamamlanmış bir ders çalışması henüz bulunmadığından görsel eklemedim.
+\FloatBarrier
+
+% ====================================================================
+\Needspace{7\baselineskip}
+\section{Test ve Değerlendirme}
+% ====================================================================
+
+
+\begin{center}
+\rowcolors{2}{acik}{white}
+\begin{tabular}{@{}p{6cm}p{3.4cm}p{3.4cm}@{}}
+\toprule
+\rowcolor{ana}\textcolor{white}{\textbf{Özellik}} & \textcolor{white}{\textbf{Bilgisayar}} & \textcolor{white}{\textbf{Telefon}} \\
+\midrule
+Masal açma & [Bilgisayarda test edilecek] & [Telefonda test edilecek] \\
+Arama ve filtreleme & [Bilgisayarda test edilecek] & [Telefonda test edilecek] \\
+Yazı büyüklüğü & [Bilgisayarda test edilecek] & [Telefonda test edilecek] \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Denenen tarayıcılar:} [Gerçekte denenen tarayıcılar eklenecek]
+
+% ====================================================================
+\Needspace{7\baselineskip}
+\section{Sunum Videosu}
+% ====================================================================
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\textbf{Video süresi:} & [Video henüz çekilmedi] \quad  \\
+\textbf{Görünürlük:} & [Video yüklenince seçilecek] \\
+\textbf{Bağlantı:} & \youtubelink \\
+\end{tabular}
+\end{center}
+
+\Needspace{5\baselineskip}
+\subsection{Video Kontrol Listesi}
+
+\begin{itemize}
+  \item $\square$ Süre 12--18 dakika aralığında.
+  \item $\square$ Sunum boyunca kameram açık, yüzüm görünüyor.
+  \item $\square$ Görünürlük \textbf{Listelenmemiş} (ya da Herkese açık); \textbf{Özel} değil.
+  \item $\square$ Bağlantıyı gizli pencerede açtım, video oynuyor.
+  \item $\square$ YouTube videoyu işlemeyi bitirdi.
+  \item $\square$ Videoyu baştan sona izledim; ses ve kamera tüm sunumda var.
+  \item $\square$ Kapaktaki bağlantı ile bu bölümdeki bağlantı aynı.
+\end{itemize}
+
+% ====================================================================
+\Needspace{7\baselineskip}
+\section{Sonuç ve Kendi Değerlendirmem}
+% ====================================================================
+
+
+Bu projede tek bir HTML dosyasıyla etkileşimli bir sayfa kurmayı öğrendim. Önceden yalnızca düz metin sayfaları hazırlarken bu kez masalları bir veri dizisinde toplamayı denedim. CSS ile gece göğü temasını oluşturdum. JavaScript sayesinde yıldızlara tıklanabilen bir yapı kurdum. En çok uzun masal metinlerini düzenlemek ve GitHub üzerinde dosyayı güncellemek zaman aldı. Metinleri yeniden anlatarak kaynaklara bağlı kalmanın önemini fark ettim. İleride klavye erişilebilirliğini ve mobil görünümü daha kapsamlı test etmek istiyorum. Video ve haftalık kanıtlar eklendiğinde teslim dosyası tamamlanacak.
+
+% ====================================================================
+\Needspace{7\baselineskip}
+\section{Kaynakça}
+% ====================================================================
+
+
+\begin{thebibliography}{9}
+\bibitem{k1} T.C. Kültür ve Turizm Bakanlığı. \emph{Masallar}. \url{https://ekitap.ktb.gov.tr/TR-78473/masallar.html} (erişim: 24.10.2026).
+\bibitem{k2} Naki Tezel. \emph{Türk Masalları I}. Kültür Bakanlığı, 1990.
+\bibitem{k3} Pertev Naili Boratav. \emph{Zaman Zaman İçinde}. Adam Yayınları, 1998.
+\bibitem{k4} Saim Sakaoğlu. \emph{Gümüşhane Bayburt Masalları}. Akçağ, 2002.
+\bibitem{k5} Türk Folklor Araştırmaları Dergisi: Osman Saygı (1969, sayı 240), Nebahat Çetin (1968, sayı 227), Selâmi Münir Yurdatap (1953, sayı 46), Saim Sakaoğlu (1975, sayı 312), Salih San (1954, sayı 56).
+
+\end{thebibliography}
+
+% ====================================================================
+\appendix
+\Needspace{7\baselineskip}
+\section{Teslim Kontrol Listesi}
+% ====================================================================
+
+\begin{itemize}
+  \item $\square$ MEBİS'e \textbf{yalnızca bu raporun PDF'ini} yükleyeceğim. ZIP ve HTML dosyası yüklemeyeceğim.
+  \item $\square$ PDF dosya adı \texttt{OgrenciNo\_AdSoyad\_vize.pdf} biçiminde.
+  \item $\square$ Kapaktaki GitHub ve YouTube bağlantıları doğru; PDF'te tıklayıp denedim.
+  \item $\square$ GitHub deposunda web sayfası (tek \texttt{.html}), rapor PDF'i, \texttt{.tex} kaynakları ve \texttt{README.md} var.
+  \item $\square$ GitHub deposu \textbf{herkese açık} (ya da öğretim üyesine erişim verdim).
+  \item $\square$ Çalışmamın son hâli teslim saatinden \textbf{önce} depoya gönderildi (sonraki commitler değerlendirilmez).
+  \item $\square$ Sayfa içsel CSS ve içsel JavaScript kullanıyor, harici dosya gerektirmiyor.
+  \item $\square$ Hazır taslak kullanmadım; yapay zekâ kullandıysam Bölüm 5'i doldurdum.
+  \item $\square$ Çalışmanın mantığını sunumda anlatabilirim.
+\end{itemize}
+
+
+
+\end{document}
