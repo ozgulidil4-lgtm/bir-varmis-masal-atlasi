@@ -13,4 +13,3 @@ Bu klasörler ders içi uygulama ve ödevlere ait ekran görüntülerini içerir
 
 `rapor/` klasöründe rapor PDF'i ve LaTeX `.tex` kaynağı bulunur. Video bağlantısı henüz eklenmemiştir.
 
-**GitHub:** Depoda `Add file → Upload files` ile ZIP'i *açtıktan sonra* `gorseller`, `rapor` klasörlerini ve `HAFTALIK_CALISMALAR.md` dosyasını yükleyin. Mevcut `index.html` dosyanızı değiştirmeyin.
