@@ -14,4 +14,4 @@ https://ozgulidil4-lgtm.github.io/bir-varmis-masal-atlasi/
 Yapay Zekâ Kullanımı
 Projenin HTML, CSS ve JavaScript kodlarının geliştirilmesinde ChatGPT'den destek alınmıştır. Tasarım kararları proje sürecinde geliştirilmiştir.
 Sunum Videosu
-Video bağlantısı tamamlandığında eklenecektir.
+https://www.youtube.com/watch?v=S6DHLm4jcbs
