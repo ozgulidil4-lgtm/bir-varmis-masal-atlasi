@@ -8,8 +8,3 @@ Bu klasörler ders içi uygulama ve ödevlere ait ekran görüntülerini içerir
 - **Hafta 4:** JavaScript — butonla metin güncelleme, kullanıcı adıyla karşılama, artırma/azaltma sayacı.
 - **Hafta 5:** JavaScript sayfa yönlendirme ve renk eşleştirme; ayrıca Film Köşem anlamsal HTML ve Bootstrap ödevi. **Not:** Mevcut kaynak pakette bu haftaya ait yalnızca iki ekran görüntüsü bulunuyor; Film Köşem ödevinin ayrı ekran görüntüleri bu pakette yok.
 - **Hafta 6:** Mitolojik Yaratıklar HTML/CSS ve Bootstrap; CodePen external CSS ve JavaScript renk değiştirme.
-
-**Hafta 7–8:** Henüz tamamlanmış ders çalışması bulunmadığı için eklenmedi.
-
-`rapor/` klasöründe rapor PDF'i ve LaTeX `.tex` kaynağı bulunur. Video bağlantısı henüz eklenmemiştir.
-
